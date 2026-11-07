@@ -1,0 +1,32 @@
+Extract this addon into C:\NM\QBAccountingQC.
+It adds only mcp_adapter.py, check_mcp.py and requirements-mcp.txt under qc_service.
+It does NOT overwrite service.py or your SQL configuration.
+
+In the SAME configured PyCharm PowerShell terminal:
+  python -m pip install -r qc_service/requirements-mcp.txt
+  python -m qc_service.check_mcp
+
+Keep the existing QC HTTP service running in its separate window.
+The adapter needs the SAME QC_API_TOKEN as that service. It has no SQL credentials;
+it calls only the existing localhost API. It exposes seven named query tools.
+
+Expected output: MCP tools found: 7, followed by MCP query succeeded and Dental
+FY2025 account 22200 opening/closing balances. This tests stdio MCP locally.
+It does not yet connect ChatGPT to your PC.
+
+Next stage: configure OpenAI Secure MCP Tunnel using its official instructions:
+https://developers.openai.com/api/docs/guides/secure-mcp-tunnels
+A tunnel_id, tunnel-client, Platform tunnel permissions and a runtime API key
+are required. Verify availability in your account; this addon contains no key.
+Use the documented stdio tunnel profile and a command pointing to:
+C:\NM\QBAccountingQC\.venv\Scripts\python.exe
+C:\NM\QBAccountingQC\qc_service\mcp_adapter.py
+Configure QC_API_TOKEN in the environment inherited by tunnel-client.
+The adapter runs privately over stdio and does not expose an HTTP listener.
+ChatGPT server authentication should match the tunnel setup; this addon does
+not implement OAuth. Do not enter localhost as a remote MCP Server URL.
+No OpenAI model API calls are made by this adapter or its check script.
+
+The QC service's SQL permission check was locally disabled by the owner.
+This adapter keeps the fixed query restrictions, but does not restore database
+permission enforcement or claim credentials are restricted to SELECT.

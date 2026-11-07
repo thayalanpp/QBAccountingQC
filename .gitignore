@@ -1,0 +1,13 @@
+.idea/
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+.env
+.env.*
+!.env.example
+*.local.ps1
+*.local.ps1.*
+
+tunnel-client/

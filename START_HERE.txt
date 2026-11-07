@@ -1,0 +1,1 @@
+Extract into your QBAccountingV1 repository. Read qc_service/README.md. Add .env.* and *.local.ps1 to your .gitignore before saving any local secret configuration. Existing project files are not replaced. Live SQL Server verification is still required.
